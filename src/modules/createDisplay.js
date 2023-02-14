@@ -5,6 +5,6 @@ const createDisplay = (container, obj) => {
   <button type="button">Comment</button>
   <button type="button">Reservation</button>`;
   container.appendChild(li);
-}
+};
 
 export default createDisplay;

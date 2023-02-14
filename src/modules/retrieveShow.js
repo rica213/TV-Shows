@@ -5,6 +5,6 @@ const retrieveShow = async (url, id) => {
   const response = await fetch(request);
   const show = await response.json();
   return show;
-}
+};
 
 export default retrieveShow;
