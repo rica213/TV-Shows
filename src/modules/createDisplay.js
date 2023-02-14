@@ -6,3 +6,5 @@ const createDisplay = (container, imgUrl, name) => {
   <button type="reservation">Reservation</button>`;
   container.appendChild(li);
 }
+
+export default createDisplay;
