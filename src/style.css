@@ -23,7 +23,7 @@ nav ul {
 
 header {
   align-items: center;
-  padding: .5rem 1rem;
+  padding: 0.5rem 1rem;
 }
 
 .logo {
@@ -42,7 +42,7 @@ nav a {
 nav a:hover,
 nav a:active,
 nav a:focus {
-  color: #CF0A0A;
+  color: #cf0a0a;
 }
 
 nav a:focus {
