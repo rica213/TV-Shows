@@ -4,6 +4,18 @@
   box-sizing: border-box;
 }
 
+.btn-language {
+  border: 0;
+  outline: 0;
+  background: #db0001;
+  color: #fff;
+  padding: 7px 20px;
+  font-size: 12px;
+  border-radius: 4px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
 .footer {
   padding: 50px 15% 10px;
   background-color: #000;
@@ -47,18 +59,6 @@
   color: #fff;
   padding: 10px 20px;
   border-radius: 3px;
-  cursor: pointer;
-}
-
-.btn-language {
-  border: 0;
-  outline: 0;
-  background: #db0001;
-  color: #fff;
-  padding: 7px 20px;
-  font-size: 12px;
-  border-radius: 4px;
-  margin-left: 10px;
   cursor: pointer;
 }
 
