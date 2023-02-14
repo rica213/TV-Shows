@@ -1,7 +1,7 @@
-const createDisplay = (container, imgUrl, name) => {
+const createDisplay = (container, obj) => {
   const li = document.createElement('li');
-  li.innerHTML = `<img src="${imgUrl}" alt="${name}"/>
-  <p class="name">${name}</p>
+  li.innerHTML = `<img src="${obj.image.medium}" alt="${obj.name}"/>
+  <p class="name">${obj.name}</p>
   <button type="button">Comment</button>
   <button type="reservation">Reservation</button>`;
   container.appendChild(li);
