@@ -1,13 +1,64 @@
+@font-face {
+  font-family: domine;
+  src: url(./assets/fonts/kan-domine-bold.ttf);
+}
+
 * {
-  padding: 0;
-  margin: 0;
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+
+html {
+  font-family: "Domine", serif;
+  font-size: calc(15px + 0.390625vw);
+}
+
+header,
+nav ul {
+  display: flex;
+  justify-content: start;
+}
+
+header {
+  align-items: center;
+  padding: 0.5rem 1rem;
+}
+
+.logo {
+  cursor: pointer;
+}
+
+nav li {
+  list-style: none;
+  padding: 1rem;
+}
+
+nav a {
+  color: black;
+}
+
+nav a:hover,
+nav a:active,
+nav a:focus {
+  color: #cf0a0a;
+}
+
+nav a:focus {
+  text-decoration: underline;
+}
+
+@media screen and (min-width: 768px) {
+  header {
+    justify-content: center;
+  }
 }
 
 .btn-language {
   border: 0;
   outline: 0;
-  background: #db0001;
+  background: #cf0a0a;
   color: #fff;
   padding: 7px 20px;
   font-size: 12px;
