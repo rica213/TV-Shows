@@ -3,7 +3,7 @@ const createDisplay = (container, obj) => {
   li.innerHTML = `<img src="${obj.image.medium}" alt="${obj.name}"/>
   <p class="name">${obj.name}</p>
   <button type="button">Comment</button>
-  <button type="reservation">Reservation</button>`;
+  <button type="button">Reservation</button>`;
   container.appendChild(li);
 }
 
