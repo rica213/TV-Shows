@@ -97,6 +97,7 @@ nav a:focus {
   color: #fff;
   align-self: center;
   align-items: center;
+  cursor: pointer;
 }
 
 .modal {
