@@ -61,9 +61,11 @@ nav a:focus {
 }
 
 .close-modal {
-  position: absolute;
-  top: 1.2rem;
-  right: 2rem;
+  position: relative;
+  left: 14rem;
+  display: flex;
+  justify-content: flex-end;
+  text-align: right;
   font-size: 2rem;
   color: #cf0a0a;
   cursor: pointer;
@@ -71,21 +73,47 @@ nav a:focus {
   background: none;
 }
 
+.show-name {
+  text-align: center;
+}
+
 .hidden {
   display: none;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  width: auto;
+  color: #fff;
+}
+
+.comment-btn,
+.comment-rev {
+  color: #fff;
+  align-self: center;
+  align-items: center;
 }
 
 .modal {
   position: absolute;
   top: 50%;
   left: 50%;
+  width: 330px;
   transform: translate(-50%, -50%);
-  width: 50%;
   background-color: white;
-  padding: 3rem;
+  padding: 0.5rem;
   border-radius: 5px;
   box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
   z-index: 10;
+}
+
+.data-img img {
+  width: 100%;
+  height: 50%;
 }
 
 .modal h3 {
@@ -95,12 +123,18 @@ nav a:focus {
 
 .modal p {
   font-size: 14px;
-  line-height: 1.6;
+  line-height: 2;
+}
+
+.name-style {
+  font-weight: bolder !important;
+  font-size: 18px !important;
 }
 
 .overlay {
   position: absolute;
   top: 0;
+  bottom: 0;
   left: 0;
   width: 100%;
   height: 100%;
