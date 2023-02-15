@@ -3,7 +3,7 @@ import generateId from './modules/generateId.js';
 import retrieveShow from './modules/retrieveShow.js';
 import createDisplay from './modules/createDisplay.js';
 import { shows, modal, overlay } from './modules/htmlElements.js';
-import url from './modules/url.js';
+import { urlShow } from './modules/url.js';
 import openModal from './modules/displayModal.js';
 import closeModal from './modules/closeModal.js';
 import init from './modules/init.js';
@@ -14,7 +14,7 @@ window.addEventListener('load', () => {
   for (let i = 0; i < 6; i += 1) {
     id = generateId(249);
     ids.push(id);
-    retrieveShow(url, id).then((obj) => createDisplay(shows, obj));
+    retrieveShow(urlShow, id).then((obj) => createDisplay(shows, obj));
   }
 });
 

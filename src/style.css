@@ -41,7 +41,8 @@ nav a {
 
 nav a:hover,
 nav a:active,
-nav a:focus {
+nav a:focus,
+.like {
   color: #cf0a0a;
 }
 
@@ -170,6 +171,11 @@ nav a:focus {
   border: none;
   border-radius: 2px;
   font-size: 0.75rem;
+}
+
+.like {
+  padding: 0.5rem;
+  cursor: pointer;
 }
 
 @media screen and (min-width: 768px) {
