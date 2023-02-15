@@ -7,7 +7,8 @@ const createDisplay = (container, obj) => {
                   <i class="fa-regular fa-heart like"></i>
                   <span class="nb-likes"></span>
                   <div class="box">
-                    <button type="button" class="comment-btn" id="${obj.id}">Comment</button>
+                    <i class="fa-regular fa-heart like"></i><br/>
+  <button type="button" class="comment-btn" id="${obj.id}">Comment</button>
                     <button type="button" class="comment-rev">Reservation</button>
                   </div>`;
   container.appendChild(li);
