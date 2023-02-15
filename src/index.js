@@ -12,7 +12,7 @@ const ids = [];
 window.addEventListener('load', () => {
   let id;
   for (let i = 0; i < 6; i += 1) {
-    id = generateId(10);
+    id = generateId(249);
     ids.push(id);
     retrieve(`${urlShow}shows/${id}`).then((obj) => createDisplay(shows, obj));
   }
