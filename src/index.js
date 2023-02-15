@@ -23,7 +23,7 @@ shows.addEventListener('click', (e) => {
     init(modal);
     ids.forEach((id) => {
       if (Number(e.target.id) === id) {
-        retrieveShow(url, id).then((data) => openModal(modal, data, overlay));
+        retrieveShow(urlShow, id).then((data) => openModal(modal, data, overlay));
       }
     });
   }
