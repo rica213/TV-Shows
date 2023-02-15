@@ -35,10 +35,12 @@ modal.addEventListener('click', (e) => {
   }
 });
 
-overlay.addEventListener('click', closeModal);
+overlay.addEventListener('click', () => {
+  closeModal(modal, overlay);
+});
 
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
-    closeModal();
+    closeModal(modal, overlay);
   }
 });
