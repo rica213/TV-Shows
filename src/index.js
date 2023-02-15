@@ -8,12 +8,12 @@ import openModal from './modules/displayModal.js';
 import closeModal from './modules/closeModal.js';
 import init from './modules/init.js';
 
-const ids = [];
+const ids = new Set();
 window.addEventListener('load', () => {
   let id;
   for (let i = 0; i < 6; i += 1) {
-    id = generateId(249);
-    ids.push(id);
+    id = generateId(10);
+    ids.add(id);
     retrieve(`${urlShow}shows/${id}`).then((obj) => createDisplay(shows, obj));
   }
 });
