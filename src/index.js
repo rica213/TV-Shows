@@ -2,11 +2,13 @@ import './style.css';
 import generateId from './modules/generateId.js';
 import retrieve from './modules/retrieve.js';
 import createDisplay from './modules/createDisplay.js';
-import { shows, modal, overlay } from './modules/htmlElements.js';
+import { shows, modal, overlay, likeBtn } from './modules/htmlElements.js';
 import { urlShow, urlInvolvement } from './modules/url.js';
 import openModal from './modules/displayModal.js';
 import closeModal from './modules/closeModal.js';
 import init from './modules/init.js';
+import addLike from './modules/addLike.js';
+import getLikes from './modules/getLikes.js';
 import sendComment from './modules/sendComment.js';
 
 const involvementId = 'B0W5zAB6ekRD2JmINXvy';
@@ -26,10 +28,8 @@ shows.addEventListener('click', (e) => {
   if (e.target.className === 'comment-btn') {
     init(modal);
     ids.forEach((id) => {
-      if (Number(e.target.id) === id) {
-        retrieve(`${urlShow}shows/${id}`).then((data) => {
-          openModal(modal, data, overlay);
-        });
+      if (Number(e.target.parentElement.parentElement.id) === id) {
+        retrieve(`${urlShow}shows/${id}`).then((data) => openModal(modal, data, overlay));
       }
     });
   }
@@ -48,6 +48,22 @@ overlay.addEventListener('click', () => {
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
     closeModal(modal, overlay);
+  }
+});
+
+shows.addEventListener('click', (e) => {
+  if (e.target.className === 'fa-regular fa-heart like') {
+    ids.forEach((id) => {
+      if (Number(e.target.parentElement.id) === id) {
+        addLike(`${urlInvolvement}apps/B0W5zAB6ekRD2JmINXvy/likes`, id);
+        console.log(getLikes(`${urlInvolvement}apps/B0W5zAB6ekRD2JmINXvy/likes`).then((obj) => {
+          console.log(obj.find(liked => liked.item_id === id).likes);
+        }));
+
+        console.log(shows.children)
+      }
+    });  
+
   }
 });
 
