@@ -3,10 +3,14 @@ import generateId from './modules/generateId.js';
 import retrieve from './modules/retrieve.js';
 import createDisplay from './modules/createDisplay.js';
 import { shows, modal, overlay } from './modules/htmlElements.js';
-import { urlShow } from './modules/url.js';
+import { urlShow, urlInvolvement } from './modules/url.js';
 import openModal from './modules/displayModal.js';
 import closeModal from './modules/closeModal.js';
 import init from './modules/init.js';
+import sendComment from './modules/sendComment.js';
+
+const involvementId = 'B0W5zAB6ekRD2JmINXvy';
+const myInvolvUrl = `${urlInvolvement}apps/${involvementId}/comments`;
 
 const ids = new Set();
 window.addEventListener('load', () => {
@@ -23,7 +27,9 @@ shows.addEventListener('click', (e) => {
     init(modal);
     ids.forEach((id) => {
       if (Number(e.target.id) === id) {
-        retrieve(`${urlShow}shows/${id}`).then((data) => openModal(modal, data, overlay));
+        retrieve(`${urlShow}shows/${id}`).then((data) => {
+          openModal(modal, data, overlay);
+        });
       }
     });
   }
@@ -42,5 +48,20 @@ overlay.addEventListener('click', () => {
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
     closeModal(modal, overlay);
+  }
+});
+
+modal.addEventListener('click', async (e) => {
+  e.preventDefault();
+  if (e.target.className === 'btn-sub') {
+    const myTarget = e.target.parentElement.parentElement.parentElement.parentElement
+      .classList[1];
+    const formName = document.querySelector('.form-name');
+    const comment = document.querySelector('.comment');
+    ids.forEach((id) => {
+      if (Number(myTarget) === id) {
+        sendComment(myInvolvUrl, id, formName.value, comment.value);
+      }
+    });
   }
 });
