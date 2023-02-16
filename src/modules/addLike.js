@@ -1,4 +1,4 @@
-const addLike = async (url, item) => {
+const addLike = async (url, id) => {
   const response = await fetch( url, 
     {
       method: 'POST',
@@ -6,7 +6,7 @@ const addLike = async (url, item) => {
         'Content-type': 'application/json; charset=UTF-8',
       },
       body: JSON.stringify({
-        item,
+        item_id : id,
       }),
     },
   );
@@ -14,8 +14,7 @@ const addLike = async (url, item) => {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
 
-  const result = await response.json();
-  return result;
+  return response;
 };
 
 
