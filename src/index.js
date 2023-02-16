@@ -2,7 +2,7 @@ import './style.css';
 import generateId from './modules/generateId.js';
 import retrieve from './modules/retrieve.js';
 import createDisplay from './modules/createDisplay.js';
-import { shows, modal, overlay, likeBtn } from './modules/htmlElements.js';
+import { shows, modal, overlay} from './modules/htmlElements.js';
 import { urlShow, urlInvolvement } from './modules/url.js';
 import openModal from './modules/displayModal.js';
 import closeModal from './modules/closeModal.js';
@@ -20,6 +20,7 @@ for (let i = 0; i < 6; i += 1) {
   id = generateId(10);
   ids.add(id);
 }
+
 window.addEventListener('load', () => {
   ids.forEach((id) => {
     retrieve(`${urlShow}shows/${id}`).then((obj) => createDisplay(shows, obj));
@@ -55,17 +56,20 @@ document.addEventListener('keydown', (e) => {
 
 shows.addEventListener('click', (e) => {
   if (e.target.className === 'fa-regular fa-heart like') {
+    let nbOfLikes;
     ids.forEach((id) => {
       if (Number(e.target.parentElement.id) === id) {
-        addLike(`${urlInvolvement}apps/B0W5zAB6ekRD2JmINXvy/likes`, id);
-        console.log(getLikes(`${urlInvolvement}apps/B0W5zAB6ekRD2JmINXvy/likes`).then((obj) => {
-          console.log(obj.find(liked => liked.item_id === id).likes);
-        }));
-
-        console.log(shows.children)
+        addLike(`${urlInvolvement}apps/${involvementId}/likes`, id);
+        getLikes(`${urlInvolvement}apps/${involvementId}/likes`).then((obj) => {
+          nbOfLikes = obj.find(liked => liked.item_id === id).likes;
+          for (const child of shows.children) {
+            if(Number(child.id) === id) {
+              child.querySelector('span.nb-likes').innerHTML = `${nbOfLikes} Likes`;
+            }
+          }
+        });
       }
     });  
-
   }
 });
 
