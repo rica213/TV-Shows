@@ -2,7 +2,7 @@ import './style.css';
 import generateId from './modules/generateId.js';
 import retrieve from './modules/retrieve.js';
 import createDisplay from './modules/createDisplay.js';
-import { shows, modal, overlay} from './modules/htmlElements.js';
+import { shows, modal, overlay } from './modules/htmlElements.js';
 import { urlShow, urlInvolvement } from './modules/url.js';
 import openModal from './modules/displayModal.js';
 import closeModal from './modules/closeModal.js';
@@ -61,15 +61,14 @@ shows.addEventListener('click', (e) => {
       if (Number(e.target.parentElement.id) === id) {
         addLike(`${urlInvolvement}apps/${involvementId}/likes`, id);
         getLikes(`${urlInvolvement}apps/${involvementId}/likes`).then((obj) => {
-          nbOfLikes = obj.find(liked => liked.item_id === id).likes;
-          for (const child of shows.children) {
-            if(Number(child.id) === id) {
-              child.querySelector('span.nb-likes').innerHTML = `${nbOfLikes} Likes`;
-            }
+          nbOfLikes = obj.find((liked) => liked.item_id === id).likes;
+          const child = Array.from(shows.children).find((elmnt) => Number(elmnt.id) === id);
+          if (child) {
+            child.querySelector('span.nb-likes').innerHTML = `${nbOfLikes} Likes`;
           }
         });
       }
-    });  
+    });
   }
 });
 
