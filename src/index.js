@@ -15,13 +15,15 @@ const involvementId = 'B0W5zAB6ekRD2JmINXvy';
 const myInvolvUrl = `${urlInvolvement}apps/${involvementId}/comments`;
 
 const ids = new Set();
+let id;
+for (let i = 0; i < 6; i += 1) {
+  id = generateId(10);
+  ids.add(id);
+}
 window.addEventListener('load', () => {
-  let id;
-  for (let i = 0; i < 6; i += 1) {
-    id = generateId(10);
-    ids.add(id);
+  ids.forEach((id) => {
     retrieve(`${urlShow}shows/${id}`).then((obj) => createDisplay(shows, obj));
-  }
+  });
 });
 
 shows.addEventListener('click', (e) => {
