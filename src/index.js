@@ -1,5 +1,4 @@
 import './style.css';
-import logo from './assets/images/logo-no-background.png';
 import retrieve from './modules/retrieve.js';
 import createDisplay from './modules/createDisplay.js';
 import { shows, modal, overlay } from './modules/htmlElements.js';
@@ -24,8 +23,8 @@ const retrievedLikes = retrieve(`${urlInvolvement}apps/${involvementId}/likes`);
 window.addEventListener('load', () => {
   let nbOfLikes = 0;
   response.then((objs) => {
-    objs.slice(0,10).forEach((obj) => {
-      createDisplay(shows, obj)
+    objs.slice(0, 10).forEach((obj) => {
+      createDisplay(shows, obj);
       retrievedLikes.then((like) => {
         nbOfLikes = countLikes(like, obj.id);
         displayLikes({ element: shows, id: obj.id, nbOfLikes });
@@ -53,7 +52,7 @@ window.addEventListener('load', () => {
   overlay.addEventListener('click', () => {
     closeModal(modal, overlay);
   });
-  
+
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
       closeModal(modal, overlay);
