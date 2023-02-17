@@ -7,29 +7,32 @@ import { urlShow, urlInvolvement } from './modules/url.js';
 import openModal from './modules/displayModal.js';
 import closeModal from './modules/closeModal.js';
 import init from './modules/init.js';
+import addLike from './modules/addLike.js';
+import getLikes from './modules/getLikes.js';
 import sendComment from './modules/sendComment.js';
 
 const involvementId = 'B0W5zAB6ekRD2JmINXvy';
 const myInvolvUrl = `${urlInvolvement}apps/${involvementId}/comments`;
 
 const ids = new Set();
+let id;
+for (let i = 0; i < 6; i += 1) {
+  id = generateId(10);
+  ids.add(id);
+}
+
 window.addEventListener('load', () => {
-  let id;
-  for (let i = 0; i < 6; i += 1) {
-    id = generateId(10);
-    ids.add(id);
+  ids.forEach((id) => {
     retrieve(`${urlShow}shows/${id}`).then((obj) => createDisplay(shows, obj));
-  }
+  });
 });
 
 shows.addEventListener('click', (e) => {
   if (e.target.className === 'comment-btn') {
     init(modal);
     ids.forEach((id) => {
-      if (Number(e.target.id) === id) {
-        retrieve(`${urlShow}shows/${id}`).then((data) => {
-          openModal(modal, data, overlay);
-        });
+      if (Number(e.target.parentElement.parentElement.id) === id) {
+        retrieve(`${urlShow}shows/${id}`).then((data) => openModal(modal, data, overlay));
       }
     });
   }
@@ -48,6 +51,24 @@ overlay.addEventListener('click', () => {
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
     closeModal(modal, overlay);
+  }
+});
+
+shows.addEventListener('click', (e) => {
+  if (e.target.className === 'fa-regular fa-heart like') {
+    let nbOfLikes;
+    ids.forEach((id) => {
+      if (Number(e.target.parentElement.id) === id) {
+        addLike(`${urlInvolvement}apps/${involvementId}/likes`, id);
+        getLikes(`${urlInvolvement}apps/${involvementId}/likes`).then((obj) => {
+          nbOfLikes = obj.find((liked) => liked.item_id === id).likes;
+          const child = Array.from(shows.children).find((elmnt) => Number(elmnt.id) === id);
+          if (child) {
+            child.querySelector('span.nb-likes').innerHTML = `${nbOfLikes} Likes`;
+          }
+        });
+      }
+    });
   }
 });
 
