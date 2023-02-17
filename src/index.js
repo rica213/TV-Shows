@@ -8,7 +8,6 @@ import openModal from './modules/displayModal.js';
 import closeModal from './modules/closeModal.js';
 import init from './modules/init.js';
 import addLike from './modules/addLike.js';
-import getLikes from './modules/getLikes.js';
 import sendComment from './modules/sendComment.js';
 import countLikes from './modules/countLikes.js';
 import displayLikes from './modules/displayLikes.js';
@@ -27,11 +26,12 @@ window.addEventListener('load', () => {
   let nbOfLikes = 0;
   ids.forEach((id) => {
     retrieve(`${urlShow}shows/${id}`).then((obj) => createDisplay(shows, obj));
-    getLikes(`${urlInvolvement}apps/${involvementId}/likes`).then((obj) => {
+    retrieve(`${urlInvolvement}apps/${involvementId}/likes`).then((obj) => {
       nbOfLikes = countLikes(obj, id);
       displayLikes({ element: shows, id, nbOfLikes });
     });
   });
+  console.log(shows.children)
 });
 
 shows.addEventListener('click', (e) => {
@@ -67,7 +67,7 @@ shows.addEventListener('click', (e) => {
     ids.forEach((id) => {
       if (Number(e.target.parentElement.id) === id) {
         addLike(`${urlInvolvement}apps/${involvementId}/likes`, id);
-        getLikes(`${urlInvolvement}apps/${involvementId}/likes`).then((obj) => {
+        retrieve(`${urlInvolvement}apps/${involvementId}/likes`).then((obj) => {
           nbOfLikes = countLikes(obj, id);
           displayLikes({ element: shows, id, nbOfLikes });
         });
