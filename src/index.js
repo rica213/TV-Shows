@@ -1,7 +1,8 @@
 import './style.css';
+import logo from './assets/images/logo-no-background.png';
 import retrieve from './modules/retrieve.js';
 import createDisplay from './modules/createDisplay.js';
-import { shows, modal, overlay } from './modules/htmlElements.js';
+import { shows, modal, overlay, showMenu } from './modules/htmlElements.js';
 import { urlShow, urlInvolvement } from './modules/url.js';
 import openModal from './modules/displayModal.js';
 import closeModal from './modules/closeModal.js';
@@ -10,6 +11,8 @@ import addLike from './modules/addLike.js';
 import sendComment from './modules/sendComment.js';
 import countLikes from './modules/countLikes.js';
 import displayLikes from './modules/displayLikes.js';
+import countItems from './modules/countItems.js';
+import displayNbItem from './modules/displayNbItem.js';
 
 const involvementId = 'B0W5zAB6ekRD2JmINXvy';
 const myInvolvUrl = `${urlInvolvement}apps/${involvementId}/comments`;
@@ -30,6 +33,9 @@ window.addEventListener('load', () => {
         displayLikes({ element: shows, id: obj.id, nbOfLikes });
       });
     });
+    const nbItems = countItems(shows);
+    init(showMenu);
+    displayNbItem(showMenu, nbItems);
   });
 
   shows.addEventListener('click', (e) => {
