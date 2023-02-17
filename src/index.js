@@ -29,7 +29,7 @@ window.addEventListener('load', () => {
     retrieve(`${urlShow}shows/${id}`).then((obj) => createDisplay(shows, obj));
     getLikes(`${urlInvolvement}apps/${involvementId}/likes`).then((obj) => {
       nbOfLikes = countLikes(obj, id);
-      displayLikes({ element: shows, id: id, nbOfLikes: nbOfLikes });
+      displayLikes({ element: shows, id, nbOfLikes });
     });
   });
 });
@@ -69,7 +69,7 @@ shows.addEventListener('click', (e) => {
         addLike(`${urlInvolvement}apps/${involvementId}/likes`, id);
         getLikes(`${urlInvolvement}apps/${involvementId}/likes`).then((obj) => {
           nbOfLikes = countLikes(obj, id);
-          displayLikes({ element: shows, id: id, nbOfLikes: nbOfLikes });
+          displayLikes({ element: shows, id, nbOfLikes });
         });
       }
     });
