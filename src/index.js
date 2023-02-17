@@ -10,6 +10,8 @@ import init from './modules/init.js';
 import addLike from './modules/addLike.js';
 import getLikes from './modules/getLikes.js';
 import sendComment from './modules/sendComment.js';
+import countLikes from './modules/countLikes.js';
+import displayLikes from './modules/displayLikes.js';
 
 const involvementId = 'B0W5zAB6ekRD2JmINXvy';
 const myInvolvUrl = `${urlInvolvement}apps/${involvementId}/comments`;
@@ -22,8 +24,13 @@ for (let i = 0; i < 6; i += 1) {
 }
 
 window.addEventListener('load', () => {
+  let nbOfLikes = 0;
   ids.forEach((id) => {
     retrieve(`${urlShow}shows/${id}`).then((obj) => createDisplay(shows, obj));
+    getLikes(`${urlInvolvement}apps/${involvementId}/likes`).then((obj) => {
+      nbOfLikes = countLikes(obj, id);
+      displayLikes({ element: shows, id: id, nbOfLikes: nbOfLikes });
+    });
   });
 });
 
@@ -61,11 +68,8 @@ shows.addEventListener('click', (e) => {
       if (Number(e.target.parentElement.id) === id) {
         addLike(`${urlInvolvement}apps/${involvementId}/likes`, id);
         getLikes(`${urlInvolvement}apps/${involvementId}/likes`).then((obj) => {
-          nbOfLikes = obj.find((liked) => liked.item_id === id).likes;
-          const child = Array.from(shows.children).find((elmnt) => Number(elmnt.id) === id);
-          if (child) {
-            child.querySelector('span.nb-likes').innerHTML = `${nbOfLikes} Likes`;
-          }
+          nbOfLikes = countLikes(obj, id);
+          displayLikes({ element: shows, id: id, nbOfLikes: nbOfLikes });
         });
       }
     });
