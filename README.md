@@ -99,8 +99,8 @@ npm install
 👤 **Tao Larissa**
 
 - GitHub: [@githubhandle](https://github.com/rica213)
-  <!-- - LinkedIn: [LinkedIn](https://www.linkedin.com/in/kehinde-audu-a44926175/) -->
-  <!-- - Twitter: [Twitter](@auducodes) -->
+  - LinkedIn: [LinkedIn](https://www.linkedin.com/in/larissa-clarielle-andrainasoa/)
+  - Twitter: [Twitter](@alc3and)
 
 👤 **Kehinde Audu**
 
