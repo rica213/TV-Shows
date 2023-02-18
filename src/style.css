@@ -114,6 +114,7 @@ nav a:focus {
   border-radius: 5px;
   box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
   z-index: 10;
+  overflow-y: scroll;
 }
 
 .data-img img {
@@ -146,6 +147,10 @@ nav a:focus {
   background-color: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(3px);
   z-index: 5;
+}
+
+.list-of-comments {
+  text-align: center;
 }
 
 .form-section {

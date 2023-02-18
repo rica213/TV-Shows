@@ -3,9 +3,7 @@ import './style.css';
 import logo from './assets/images/logo-no-background.png';
 import retrieve from './modules/retrieve.js';
 import createDisplay from './modules/createDisplay.js';
-import {
-  shows, modal, overlay, showMenu,
-} from './modules/htmlElements.js';
+import { shows, modal, overlay, showMenu } from './modules/htmlElements.js';
 import { urlShow, urlInvolvement } from './modules/url.js';
 import openModal from './modules/displayModal.js';
 import closeModal from './modules/closeModal.js';
@@ -16,10 +14,14 @@ import countLikes from './modules/countLikes.js';
 import displayLikes from './modules/displayLikes.js';
 import countItems from './modules/countItems.js';
 import displayNbItem from './modules/displayNbItem.js';
+import addComment from './modules/addComment.js';
+import displayComments from './modules/displayComments.js';
 
 const involvementId = 'B0W5zAB6ekRD2JmINXvy';
 const myInvolvUrl = `${urlInvolvement}apps/${involvementId}/comments`;
 const urlLikes = `${urlInvolvement}apps/${involvementId}/likes`;
+const getCommentFromApi =
+  'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/B0W5zAB6ekRD2JmINXvy/comments?item_id=';
 
 const ids = Array.from({ length: 10 }, (_, i) => i + 1);
 const likes = {};
@@ -48,7 +50,13 @@ window.addEventListener('load', () => {
       init(modal);
       ids.forEach((id) => {
         if (Number(e.target.parentElement.parentElement.id) === id) {
-          retrieve(`${urlShow}shows/${id}`).then((data) => openModal(modal, data, overlay));
+          retrieve(`${urlShow}shows/${id}`).then((data) =>
+            openModal(modal, data, overlay)
+          );
+          retrieve(`${getCommentFromApi}${id}`).then((comment) => {
+            const listsOfComments = document.querySelector('.list-of-comments');
+            displayComments(listsOfComments, comment);
+          });
         }
       });
     }
@@ -86,13 +94,23 @@ window.addEventListener('load', () => {
 
   modal.addEventListener('click', (e) => {
     e.preventDefault();
+    const today = new Date();
+    const listOfComment = document.querySelector('.list-of-comments');
     if (e.target.className === 'btn-sub') {
       const myTarget = e.target.closest('.modal').classList[1];
+
       const formName = document.querySelector('.form-name');
       const comment = document.querySelector('.comment');
       ids.forEach((id) => {
         if (Number(myTarget) === id) {
-          sendComment(myInvolvUrl, id, formName.value, comment.value);
+          if (!(formName.value === '') || !(comment.value === '')) {
+            sendComment(myInvolvUrl, id, formName.value, comment.value);
+            addComment(listOfComment, {
+              date: today.toLocaleDateString(),
+              name: formName.value,
+              comment: comment.value,
+            });
+          }
         }
       });
     }
