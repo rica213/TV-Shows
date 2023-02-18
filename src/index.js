@@ -17,6 +17,7 @@ import displayLikes from './modules/displayLikes.js';
 import countItems from './modules/countItems.js';
 import displayNbItem from './modules/displayNbItem.js';
 import addComment from './modules/addComment.js';
+import countComments from './modules/countComments.js';
 import displayComments from './modules/displayComments.js';
 
 const involvementId = 'B0W5zAB6ekRD2JmINXvy';
@@ -55,6 +56,10 @@ window.addEventListener('load', () => {
           retrieve(`${getCommentFromApi}${id}`).then((comment) => {
             const listsOfComments = document.querySelector('.list-of-comments');
             displayComments(listsOfComments, comment);
+
+            const noOfComment = document.querySelector('.no-of-comments');
+            const returnedNoOfComments = countComments(listsOfComments);
+            noOfComment.innerHTML = ` (${returnedNoOfComments})`;
           });
         }
       });
