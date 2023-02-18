@@ -8,7 +8,7 @@ const openModal = (modal, data, overlay) => {
                         <p class="show-name">Language: ${data.language}</p>
                         <p class="show-name">Premiered: ${data.premiered}</p>
                         <div>
-                          <h4 class="show-name name-style">Comment<span class="no-of-comments">(2)<span></h4>
+                          <h4 class="show-name name-style">Comment<span class="no-of-comments"><span></h4>
                           <ul class="list-of-comments">
                             
                           </ul>
