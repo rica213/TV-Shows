@@ -24,6 +24,21 @@ module.exports = {
         test: /\.(jpg|png)$/,
         use: {
           loader: 'url-loader',
+          options: {
+            limit: 8192, // Use url-loader for images smaller than 8kb
+            outputPath: 'images', // Output images to the 'images' folder in 'dist'
+            publicPath: 'images', // Use 'images' folder as the base URL for images in HTML
+          },
+        },
+      },
+      {
+        test: /\.(jpg|png)$/,
+        use: {
+          loader: 'file-loader',
+          options: {
+            name: '[name].[ext]',
+            outputPath: 'images',
+          },
         },
       },
     ],
