@@ -1,5 +1,3 @@
-const countItems = (element) => {
-  return element.childElementCount;
-};
+const countItems = (element) => element.childElementCount;
 
 export default countItems;
