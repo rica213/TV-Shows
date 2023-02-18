@@ -1,7 +1,11 @@
 import './style.css';
+/* eslint-disable no-unused-vars */
+import logo from './assets/images/logo-no-background.png';
 import retrieve from './modules/retrieve.js';
 import createDisplay from './modules/createDisplay.js';
-import { shows, modal, overlay } from './modules/htmlElements.js';
+import {
+  shows, modal, overlay, showMenu,
+} from './modules/htmlElements.js';
 import { urlShow, urlInvolvement } from './modules/url.js';
 import openModal from './modules/displayModal.js';
 import closeModal from './modules/closeModal.js';
@@ -10,12 +14,15 @@ import addLike from './modules/addLike.js';
 import sendComment from './modules/sendComment.js';
 import countLikes from './modules/countLikes.js';
 import displayLikes from './modules/displayLikes.js';
+import countItems from './modules/countItems.js';
+import displayNbItem from './modules/displayNbItem.js';
 
 const involvementId = 'B0W5zAB6ekRD2JmINXvy';
 const myInvolvUrl = `${urlInvolvement}apps/${involvementId}/comments`;
 const urlLikes = `${urlInvolvement}apps/${involvementId}/likes`;
 
 const ids = Array.from({ length: 10 }, (_, i) => i + 1);
+const likes = {};
 
 const response = retrieve(`${urlShow}shows`);
 const retrievedLikes = retrieve(`${urlInvolvement}apps/${involvementId}/likes`);
@@ -27,9 +34,13 @@ window.addEventListener('load', () => {
       createDisplay(shows, obj);
       retrievedLikes.then((like) => {
         nbOfLikes = countLikes(like, obj.id);
+        likes[obj.id] = nbOfLikes;
         displayLikes({ element: shows, id: obj.id, nbOfLikes });
       });
     });
+    const nbItems = countItems(shows);
+    init(showMenu);
+    displayNbItem(showMenu, nbItems);
   });
 
   shows.addEventListener('click', (e) => {
@@ -65,20 +76,18 @@ window.addEventListener('load', () => {
       ids.forEach((id) => {
         if (Number(e.target.parentElement.id) === id) {
           addLike(urlLikes, id);
-          retrievedLikes.then((obj) => {
-            nbOfLikes = countLikes(obj, id);
-            displayLikes({ element: shows, id, nbOfLikes });
-          });
+          nbOfLikes = likes[id] + 1;
+          likes[id] = nbOfLikes;
+          displayLikes({ element: shows, id, nbOfLikes });
         }
       });
     }
   });
 
-  modal.addEventListener('click', async (e) => {
+  modal.addEventListener('click', (e) => {
     e.preventDefault();
     if (e.target.className === 'btn-sub') {
-      const myTarget = e.target.parentElement.parentElement.parentElement.parentElement
-        .classList[1];
+      const myTarget = e.target.closest('.modal').classList[1];
       const formName = document.querySelector('.form-name');
       const comment = document.querySelector('.comment');
       ids.forEach((id) => {

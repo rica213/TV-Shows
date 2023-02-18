@@ -276,6 +276,10 @@ textarea {
   margin-bottom: 10px;
 }
 
+.col a:hover {
+  color: #fff;
+}
+
 .footer .row {
   align-items: flex-start;
   padding: 10px 0;
