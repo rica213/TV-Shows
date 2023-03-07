@@ -34,7 +34,7 @@ const retrievedLikes = retrieve(`${urlInvolvement}apps/${involvementId}/likes`);
 window.addEventListener('load', () => {
   let nbOfLikes = 0;
   response.then((objs) => {
-    objs.slice(0, 10).forEach((obj) => {
+    objs.forEach((obj) => {
       createDisplay(shows, obj);
       retrievedLikes.then((like) => {
         nbOfLikes = countLikes(like, obj.id);
