@@ -25,8 +25,9 @@ const myInvolvUrl = `${urlInvolvement}apps/${involvementId}/comments`;
 const urlLikes = `${urlInvolvement}apps/${involvementId}/likes`;
 const getCommentFromApi = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/B0W5zAB6ekRD2JmINXvy/comments?item_id=';
 
-const ids = Array.from({ length: 10 }, (_, i) => i + 1);
+let ids = 0;
 const likes = {};
+let nbItems = 0;
 
 const response = retrieve(`${urlShow}shows`);
 const retrievedLikes = retrieve(`${urlInvolvement}apps/${involvementId}/likes`);
@@ -42,7 +43,8 @@ window.addEventListener('load', () => {
         displayLikes({ element: shows, id: obj.id, nbOfLikes });
       });
     });
-    const nbItems = countItems(shows);
+    nbItems = countItems(shows);
+    ids = Array.from({ length: nbItems }, (_, i) => i + 1);
     init(showMenu);
     displayNbItem(showMenu, nbItems);
   });
