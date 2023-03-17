@@ -84,12 +84,16 @@ window.addEventListener('load', () => {
     }
   });
 
+  // add a new like
   shows.addEventListener('click', (e) => {
     if (e.target.className === 'fa-regular fa-heart like') {
-      let nbOfLikes;
+      let nbOfLikes = 0;
       ids.forEach((id) => {
         if (Number(e.target.parentElement.id) === id) {
           addLike(urlLikes, id);
+          if (!likes[id]) {
+            likes[id] = 0; // This fix the NaN error
+          }
           nbOfLikes = likes[id] + 1;
           likes[id] = nbOfLikes;
           displayLikes({ element: shows, id, nbOfLikes });
@@ -98,13 +102,13 @@ window.addEventListener('load', () => {
     }
   });
 
+  // add a new comment
   modal.addEventListener('click', (e) => {
     e.preventDefault();
     const today = new Date();
     const listOfComment = document.querySelector('.list-of-comments');
     if (e.target.className === 'btn-sub') {
       const myTarget = e.target.closest('.modal').classList[1];
-
       const formName = document.querySelector('.form-name');
       const comment = document.querySelector('.comment');
       ids.forEach((id) => {
