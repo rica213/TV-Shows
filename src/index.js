@@ -113,7 +113,10 @@ window.addEventListener('load', () => {
       const comment = document.querySelector('.comment');
       ids.forEach((id) => {
         if (Number(myTarget) === id) {
-          if (!(formName.value === '') || !(comment.value === '')) {
+          if (!(comment.value === '')) {
+            if ((formName.value === '')) {
+              formName.value = 'Anonymous'
+            }
             sendComment(myInvolvUrl, id, formName.value, comment.value);
             addComment(listOfComment, {
               date: today.toLocaleDateString(),
