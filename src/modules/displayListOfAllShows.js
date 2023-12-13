@@ -9,7 +9,6 @@ const displayListOfAllShows = (container, obj) => {
                   <span class="nb-likes"></span>
                   <div class="box">
                     <button type="button" class="comment-btn">Comment</button>
-                    <button type="button" class="comment-rev">Reservation</button>
                   </div>`;
   container.appendChild(li);
 };
