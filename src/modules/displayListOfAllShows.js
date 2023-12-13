@@ -1,4 +1,4 @@
-const createDisplay = (container, obj) => {
+const displayListOfAllShows = (container, obj) => {
   const li = document.createElement('li');
   li.classList.add('show-modal');
   li.id = obj.id;
@@ -14,4 +14,4 @@ const createDisplay = (container, obj) => {
   container.appendChild(li);
 };
 
-export default createDisplay;
+export default displayListOfAllShows;

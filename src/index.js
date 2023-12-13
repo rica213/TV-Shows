@@ -2,7 +2,7 @@ import './style.css';
 /* eslint-disable no-unused-vars */
 import logo from './assets/images/logo-no-background.png';
 import retrieve from './modules/retrieve.js';
-import createDisplay from './modules/createDisplay.js';
+import displayListOfAllShows from './modules/displayListOfAllShows.js';
 import {
   shows, modal, overlay, showMenu,
 } from './modules/htmlElements.js';
@@ -36,7 +36,7 @@ window.addEventListener('load', () => {
   let nbOfLikes = 0;
   response.then((objs) => {
     objs.forEach((obj) => {
-      createDisplay(shows, obj);
+      displayListOfAllShows(shows, obj);
       retrievedLikes.then((like) => {
         nbOfLikes = countLikes(like, obj.id);
         likes[obj.id] = nbOfLikes;
