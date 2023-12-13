@@ -55,7 +55,7 @@ nav a:focus {
   text-decoration: underline;
 }
 
-.show-modal {
+.show-item {
   list-style: none;
   font-size: 1rem;
   margin: 0.5rem;

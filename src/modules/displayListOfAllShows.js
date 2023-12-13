@@ -1,6 +1,6 @@
 const displayListOfAllShows = (container, obj) => {
   const li = document.createElement('li');
-  li.classList.add('show-modal');
+  li.classList.add('show-item');
   li.id = obj.id;
   li.innerHTML = `
                     <img src="${obj.image.medium}" alt="${obj.name}"/>
